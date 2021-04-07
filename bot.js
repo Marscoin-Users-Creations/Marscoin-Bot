@@ -1,15 +1,15 @@
 // discord bot
 
-var Discord = require("discord.js");
+const Discord = require("discord.js");
 
-var botHelpEmbed = new Discord.MessageEmbed();
-var client = new Discord.Client();
-var goodbyEmbed = new Discord.MessageEmbed();
-var kickEmbed = new Discord.MessageEmbed();
+const botHelpEmbed = new Discord.MessageEmbed();
+const client = new Discord.Client();
+const goodbyEmbed = new Discord.MessageEmbed();
+const kickEmbed = new Discord.MessageEmbed();
 var logsChannel = client.channels.get(797977942557851678);
 var discordPrefix = ",";
 var welcomeChannel = client.channels.get(797965608721448980);
-var welcomeEmbed = new Discord.MessageEmbed();
+const welcomeEmbed = new Discord.MessageEmbed();
 
 client.on("ready", () => {
     
@@ -93,3 +93,28 @@ client.on("message", msg => {
 
 // twitter bot
 
+const twitter = require("twitter");
+
+const client = new twitter({
+    
+    consumer_key: "",
+    consumer_secret: "",
+    access_token_key: "",
+    access_token_secret: ""
+    
+});
+
+// web management
+
+const http = require("http");
+const url = require("url");
+
+const httpServer = http.createServer(function (req, res) {
+    
+    var page = url.parse(req.res).pathname;
+    
+    if (page == "/home") {
+        
+    };
+    
+});
