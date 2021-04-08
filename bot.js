@@ -41,18 +41,29 @@ client.on("guildMemberAdd", userJoined => {
 
 client.on("guildMemberRemove", userLeft => {
     
-    console.log(`The user ${} left the server !`);
+    console.log(`The user ${serLeft} left the server !`);
+    goodbyeEmbed.setColor("#1D7EEB");
+    goodbyeEmbed.setAuthor(userLeft);
     welcomeChannel.send(goodbyeEmbed);
     
 });
 
 client.on("guildMemberKick" userKicked => {
     
-    console.log(`The user ${userKicked} was kicked by ${} for ${} !`);
-    kickEmbed.setColor("#");
-    kickEmbed.setAuthor();
-    kickEmbed.setTitle(`The user ${userKicked} was kicked by ${}`);
+    console.log(`The user ${userKicked} was kicked !`);
+    kickEmbed.setColor("#1D7EEB");
+    kickEmbed.setAuthor(userKicked);
+    kickEmbed.setTitle(`The user ${userKicked} was kicked !`);
     logsChannel.send(kickEmbed);
+    
+});
+
+client.on("guildMemberBan, userBanned => {
+    
+    console.log(`The user ${userBanned} was banned from the server ${userBanned.guild.name}!`);
+    banEmbed.setColor("#1D7EEB");
+    banEmbed.setAuthor(userBanned);
+    banEmbed.setTitle(`The user ${userBanned} was banned !`);
     
 });
 
@@ -65,15 +76,15 @@ client.on("message", msg => {
             if (msg.author.bot) {
                 
                 console.log(`The bot ${msg.author} tried to use the ,help command !`);
-                botHelpEmbed.setColor("#");
-                botHelpEmbed.setAuthor("");
-                botHelpEmbed.setTitle("");
+                botHelpEmbed.setColor("#1D7EEB");
+                botHelpEmbed.setAuthor(msg.author);
+                botHelpEmbed.setTitle("**Bot tried to use a command !**");
                 botHelpEmbed.setDescription(`The bot ${msg.author} tried to use the ,help command.\nHe tried the ${Date.year}`);
                 logsChannel.send(botHelpEmbed);
                 
             } else {
                 
-                helpEmbed.setColor("#");
+                helpEmbed.setColor("#1D7EEB");
                 helpEmbed.setAuthor(msg.author);
                 helpEmbed.setTitle("Marscoin bot help page");
                 helpEmbed.setDescription("**Help page :**\n\n**🌐General commands :**");
@@ -83,7 +94,8 @@ client.on("message", msg => {
             
         } else {
             
-            
+            console.log(`The user ${msg.author} tried to use the ,help command in the channel ${msg.channel.name} !`);
+            msg.channel.send("You can't use the command on this channel !");
             
         };
         
@@ -114,6 +126,13 @@ const httpServer = http.createServer(function (req, res) {
     var page = url.parse(req.res).pathname;
     
     if (page == "/home") {
+        
+        
+        
+    };
+    if (page == "/config") {
+        
+        
         
     };
     
