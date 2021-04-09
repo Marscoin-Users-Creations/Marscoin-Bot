@@ -127,12 +127,14 @@ const httpServer = http.createServer(function (req, res) {
     
     if (page == "/home") {
         
-        
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write("<html>\n    \n    <head>\n        \n        \n        \n</head>\n    <body>\n        \n        <p>version 0 web page, coding it</p>\n        \n    </body>\n</html>");
         
     };
     if (page == "/config") {
         
-        
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write("<html>\n    \n    <head>\n        \n        \n        \n</head>\n    <body>\n        \n        <p>version 0 web page, coding it</p>\n        \n    </body>\n</html>");
         
     };
     
