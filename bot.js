@@ -2,16 +2,17 @@
 
 const Discord = require("discord.js");
 
-const botHelpEmbed = new Discord.MessageEmbed();
+const embed = new Discord.MessageEmbed();
 const client = new Discord.Client();
+const discordBotToken = ""; // paste your bot token between the quotes
 var discordPrefix = ",";
-const goodbyEmbed = new Discord.MessageEmbed();
-const kickEmbed = new Discord.MessageEmbed();
+var kickUser =  0;
+var kickUserReason = "none";
 const logsChannel = client.channels.get(797977942557851678);
 const nextEmote = "▶";
 const previousEmote = "◀";
+const staffs = [ 598868304769187842, 469576772048912394, 447432117669068800, 271008178169315338, 125952165616418816, 533016846031650826 ];
 const welcomeChannel = client.channels.get(797965608721448980);
-const welcomeEmbed = new Discord.MessageEmbed();
 
 client.on("ready", () => {
     
@@ -34,38 +35,44 @@ client.on("ready", () => {
 client.on("guildMemberAdd", userJoined => {
     
     console.log(`The user ${guildMemberAdd} joined the server !`);
-    welcomeEmbed.setColor("#");
-    welcomeEmbed.setAuthor(guildMemberAdd);
-    welcomeEmbed.setTitle(`**The user ${guildMemberAdd} joined the server !**`);
-    welcomeChannel.send(welcomeEmbed);
+    embed.setColor("#");
+    embed.setAuthor(guildMemberAdd);
+    embed.setTitle(`**A user joined the server !**`);
+    embed.setDescription(`The user ${guildMemberAdd} joined the server.`);
+    welcomeChannel.send(embed);
     
 });
 
 client.on("guildMemberRemove", userLeft => {
     
-    console.log(`The user ${serLeft} left the server !`);
-    goodbyeEmbed.setColor("#1D7EEB");
-    goodbyeEmbed.setAuthor(userLeft);
-    welcomeChannel.send(goodbyeEmbed);
+    console.log(`The user ${userLeft} left the server !`);
+    embed.setColor("#1D7EEB");
+    embed.setAuthor(userLeft);
+    embed.setTitle("**A user left the server !**");
+    embed.setDescription(`The user ${userLeft} left the server.`);
+    welcomeChannel.send(embed);
     
 });
 
 client.on("guildMemberKick" userKicked => {
     
     console.log(`The user ${userKicked} was kicked !`);
-    kickEmbed.setColor("#1D7EEB");
-    kickEmbed.setAuthor(userKicked);
-    kickEmbed.setTitle(`The user ${userKicked} was kicked !`);
-    logsChannel.send(kickEmbed);
+    embed.setColor("#1D7EEB");
+    embed.setAuthor(userKicked);
+    embed.setTitle("**A user was kicked !**");
+    embed.setDescription(`The user ${userKicked} was kicked from the server.`);
+    logsChannel.send(embed);
     
 });
 
 client.on("guildMemberBan, userBanned => {
     
     console.log(`The user ${userBanned} was banned from the server ${userBanned.guild.name}!`);
-    banEmbed.setColor("#1D7EEB");
-    banEmbed.setAuthor(userBanned);
-    banEmbed.setTitle(`The user ${userBanned} was banned !`);
+    embed.setColor("#1D7EEB");
+    embed.setAuthor(userBanned);
+    embed.setTitle("**A user was banned !**");
+    embed.setDescription(`The user ${userBanned} was banned from the server.`);
+    logsChannel.send(embed);
     
 });
 
@@ -78,19 +85,19 @@ client.on("message", msg => {
             if (msg.author.bot) {
                 
                 console.log(`The bot ${msg.author} tried to use the ,help command !`);
-                botHelpEmbed.setColor("#1D7EEB");
-                botHelpEmbed.setAuthor(msg.author);
-                botHelpEmbed.setTitle("**Bot tried to use a command !**");
-                botHelpEmbed.setDescription(`The bot ${msg.author} tried to use the ,help command.\nHe tried the ${Date.year}`);
-                logsChannel.send(botHelpEmbed);
+                embed.setColor("#1D7EEB");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**A bot tried to use a command !**");
+                embed.setDescription(`The bot ${msg.author} tried to use the ,help command.`);
+                logsChannel.send(embed);
                 
             } else {
                 
-                helpEmbed.setColor("#1D7EEB");
-                helpEmbed.setAuthor(msg.author);
-                helpEmbed.setTitle("Marscoin bot help page");
-                helpEmbed.setDescription("**Help page :**\n\n**🌐General commands :**");
-                msg.channel.send(helpEmbed);
+                embed.setColor("#1D7EEB");
+                embed.setAuthor(msg.author);
+                embed.setTitle("Marscoin bot help page");
+                embed.setDescription("**Help page :**\n\n**🌐General commands :**");
+                msg.channel.send(embed);
                 msg.react(previousEmote);
                 msg.react(nextEmote);
                 
@@ -104,8 +111,80 @@ client.on("message", msg => {
         };
         
     };
+    if (msg.content.startsWith === discordPrefix +"kick") {
+        
+        if (msg.author.bot) {
+            
+            embed.setColor("#1D7EEB");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A bot tried to use a command !**");
+            embed.setDescription(`The bot ${msg.author} tried to use the ,kick command !`);
+            logsChannel.send(botEmbed);
+            
+        } else {
+            
+            if (msg.author.id in staffs) {
+                
+                if (kickUser = 0) {
+                    
+                    msg.channel.send("You need to mention a user !");
+                    embed.setColor("#FF0000");
+                    embed.setAuthor(msg.author);
+                    embed.setTitle("**Kick attempt !**");
+                    embed.setDescription("The user " +msg.author +" tried to kick a user, but didn't mentionned anybody;");
+                    logsChannel.send(embed);
+                    kickUser = 0;
+                    kickUserReason = "none";
+                    
+                } else {
+                    
+                    if (kickUserReason = "none") {
+                        
+                        msg.channel.send("You need to set a reason to kick a user !");
+                        embed.setColor("#FF0000");
+                        embed.setAuthor(msg.author);
+                        embed.setTitle("**Kick attempt !**");
+                        embed.setDescription("The user " +msg.author +" tried to kick a user, but didn't mentionned anybody.");
+                        logsChannel.send(embed);
+                        kickUser = 0;
+                        kickUserReason = "none";
+                        
+                    } else {
+                        
+                        kickUser = msg.mentions.members.first();
+                        kickUserReason = msg.content.slice(discordPrefix.length +23).trim();
+                        kickUser.kick();
+                        embed.setColor("#1D7EEB");
+                        embed.setAuthor(msg.author);
+                        embed.setTitle("**User was kicked !**");
+                        embed.setDescription(`The user ${kickUser} was kicked from the server for ${kickUserReason}.`);
+                        logsChannel.send(embed);
+                        kickUser = 0;
+                        kickUserReason = "none";
+                        
+                    };
+                    
+                };
+                
+            } else {
+                
+                console.log(`The user ${msg.author} tried to kick a user but is not in the staff !`);
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**A user tried to kick an other user !**");
+                embed.setDescription(`The user ${msg.author} tried to kick a user but is not in the staff.`);
+                logsChannel.send(embed);
+                msg.channel.send("You don't have the access to this command !");
+                
+            };
+            
+        };
+        
+    };
     
 });
+
+client.login(discordBotToken);
 
 // twitter bot
 
