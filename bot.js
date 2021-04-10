@@ -4,11 +4,13 @@ const Discord = require("discord.js");
 
 const botHelpEmbed = new Discord.MessageEmbed();
 const client = new Discord.Client();
+var discordPrefix = ",";
 const goodbyEmbed = new Discord.MessageEmbed();
 const kickEmbed = new Discord.MessageEmbed();
-var logsChannel = client.channels.get(797977942557851678);
-var discordPrefix = ",";
-var welcomeChannel = client.channels.get(797965608721448980);
+const logsChannel = client.channels.get(797977942557851678);
+const nextEmote = "▶";
+const previousEmote = "◀";
+const welcomeChannel = client.channels.get(797965608721448980);
 const welcomeEmbed = new Discord.MessageEmbed();
 
 client.on("ready", () => {
@@ -89,6 +91,8 @@ client.on("message", msg => {
                 helpEmbed.setTitle("Marscoin bot help page");
                 helpEmbed.setDescription("**Help page :**\n\n**🌐General commands :**");
                 msg.channel.send(helpEmbed);
+                msg.react(previousEmote);
+                msg.react(nextEmote);
                 
             };
             
