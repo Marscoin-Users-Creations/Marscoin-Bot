@@ -126,15 +126,23 @@ client.on("message", msg => {
             
             if (msg.author.id in staffs) {
                 userMentionned = msg.mentions.members.first().id;
-                reason = msg.content.slice(discordPrefix.length +23).trim();
-                userMentionned.kick(reason);
-                embed.setColor("#1D7EEB");
-                embed.setAuthor(msg.author);
-                embed.setTitle("**User was kicked !**");
-                embed.setDescription(`The user <@" +kickUser +"> was kicked from the server for " +kickUserReason +" .");
-                logsChannel.send(embed);
-                userMentionned = 0;
-                reason = "none";
+                if (userMentionned in staffs) {
+                    
+                    console.log("The user " +msg.author +" tried to ban  staff member.");
+                    
+                } else {
+                    
+                    reason = msg.content.slice(discordPrefix.length +23).trim();
+                    userMentionned.kick(reason);
+                    embed.setColor("#1D7EEB");
+                    embed.setAuthor(msg.author);
+                    embed.setTitle("**User was kicked !**");
+                    embed.setDescription("The user <@" +kickUser +"> was kicked from the server for " +kickUserReason +" .");
+                    logsChannel.send(embed);
+                    userMentionned = 0;
+                    reason = "none";
+                    
+                };
                 
             } else {
                 
@@ -142,7 +150,7 @@ client.on("message", msg => {
                 embed.setColor("#FF0000");
                 embed.setAuthor(msg.author);
                 embed.setTitle("**A user tried to kick an other user !**");
-                embed.setDescription("The user <@" +msg.author +"> tried to kick a user but is not in the staff.");
+                embed.setDescription("The user <@" +msg.author +"> tried to kick a user but is a member of the staff.");
                 logsChannel.send(embed);
                 msg.channel.send("You don't have the access to this command !");
                 
@@ -155,7 +163,7 @@ client.on("message", msg => {
         
         if (msg.author.bot) {
             
-            console.log(`The bot ${msg.author} tried to use the ban command !`);
+            console.log("The bot <@" +msg.author +" tried to use the ban command !");
             embed.setColor("#FF0000");
             embed.setAuthor(msg.author);
             embed.setTitle("**A bot tried to use the ,ban command !**");
