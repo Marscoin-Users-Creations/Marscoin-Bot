@@ -111,6 +111,11 @@ client.on("message", msg => {
         };
         
     };
+    if (msg.content.startsWith === discordPrefix +"warn") {
+        
+        
+        
+    };
     if (msg.content.startsWith === discordPrefix +"kick") {
         
         if (msg.author.bot) {
