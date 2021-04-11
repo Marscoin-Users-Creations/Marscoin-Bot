@@ -6,8 +6,8 @@ const embed = new Discord.MessageEmbed();
 const client = new Discord.Client();
 const discordBotToken = ""; // paste your bot token between the quotes
 var discordPrefix = ",";
-var kickUser =  0;
-var kickUserReason = "none";
+var userMentionned =  0;
+var reason = "none";
 const logsChannel = client.channels.get(797977942557851678);
 const nextEmote = "▶";
 const previousEmote = "◀";
@@ -124,47 +124,16 @@ client.on("message", msg => {
         } else {
             
             if (msg.author.id in staffs) {
-                
-                if (kickUser = 0) {
-                    
-                    msg.channel.send("You need to mention a user !");
-                    embed.setColor("#FF0000");
-                    embed.setAuthor(msg.author);
-                    embed.setTitle("**Kick attempt !**");
-                    embed.setDescription("The user " +msg.author +" tried to kick a user, but didn't mentionned anybody;");
-                    logsChannel.send(embed);
-                    kickUser = 0;
-                    kickUserReason = "none";
-                    
-                } else {
-                    
-                    if (kickUserReason = "none") {
-                        
-                        msg.channel.send("You need to set a reason to kick a user !");
-                        embed.setColor("#FF0000");
-                        embed.setAuthor(msg.author);
-                        embed.setTitle("**Kick attempt !**");
-                        embed.setDescription("The user " +msg.author +" tried to kick a user, but didn't mentionned anybody.");
-                        logsChannel.send(embed);
-                        kickUser = 0;
-                        kickUserReason = "none";
-                        
-                    } else {
-                        
-                        kickUser = msg.mentions.members.first();
-                        kickUserReason = msg.content.slice(discordPrefix.length +23).trim();
-                        kickUser.kick();
-                        embed.setColor("#1D7EEB");
-                        embed.setAuthor(msg.author);
-                        embed.setTitle("**User was kicked !**");
-                        embed.setDescription(`The user ${kickUser} was kicked from the server for ${kickUserReason}.`);
-                        logsChannel.send(embed);
-                        kickUser = 0;
-                        kickUserReason = "none";
-                        
-                    };
-                    
-                };
+                userMentionned = msg.mentions.members.first().id;
+                reason = msg.content.slice(discordPrefix.length +23).trim();
+                userMentionned.kick(reason);
+                embed.setColor("#1D7EEB");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**User was kicked !**");
+                embed.setDescription(`The user ${kickUser} was kicked from the server for ${kickUserReason}.`);
+                logsChannel.send(embed);
+                kickUser = 0;
+                kickUserReason = "none";
                 
             } else {
                 
@@ -175,6 +144,45 @@ client.on("message", msg => {
                 embed.setDescription(`The user ${msg.author} tried to kick a user but is not in the staff.`);
                 logsChannel.send(embed);
                 msg.channel.send("You don't have the access to this command !");
+                
+            };
+            
+        };
+        
+    };
+    if (msg.content.startsWith === discordPrefix +"ban") {
+        
+        if (msg.author.bot) {
+            
+            console.log(`The bot ${msg.author} tried to use the ban command !`);
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A bot tried to use the ,ban command !**");
+            embed.setDescription("The bot " +msg.author +" tried to use the ,ban commannd.");
+            logsChannel.send(embed);
+            
+        } else {
+            
+            if (msg.author.id in staffs) {
+                
+                userMentionned = msg.mentions.members.first().id;
+                reason = msg.content.slice().trim();
+                userMentionned.ban(reason);
+                console.log("The user " +userMentionned +" was banned from the server for " +reason +" by " +msg.author +" .");
+                embed.setColor("#00FF00");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**User banned !**");
+                embed.setDescription("The user " +userMentionned +" was banned from the server for " +reason +" by " +msg.author +" .");
+                logsChannel.send(embed);
+                embed.setColor("#00FF00");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**User banned !**");
+                embed.setDescription("The user " +userMentionned +" was banned from the server.");
+                msg.channel.send(embed);
+                
+            } else {
+                
+                
                 
             };
             
