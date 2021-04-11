@@ -132,8 +132,8 @@ client.on("message", msg => {
                 embed.setTitle("**User was kicked !**");
                 embed.setDescription(`The user ${kickUser} was kicked from the server for ${kickUserReason}.`);
                 logsChannel.send(embed);
-                kickUser = 0;
-                kickUserReason = "none";
+                userMentionned = 0;
+                reason = "none";
                 
             } else {
                 
@@ -179,10 +179,20 @@ client.on("message", msg => {
                 embed.setTitle("**User banned !**");
                 embed.setDescription("The user " +userMentionned +" was banned from the server.");
                 msg.channel.send(embed);
+                userMentionned = 0;
+                reason = "none";
                 
             } else {
                 
-                
+                console.log("The user " +msg.author +" tried to ban the user " +userMentionned +" for " +reason +" .");
+                msg.channel.send("You are not in the staff members, you can't ban the others.");
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**A user tried to ban an other user !**");
+                embed.setDescription("The user " +msg.author +" tried to ban the user " +userMentionned +" for " +reason +" .");
+                logsChannel.send(embed);
+                userMentionned = 0;
+                reason = "none";
                 
             };
             
