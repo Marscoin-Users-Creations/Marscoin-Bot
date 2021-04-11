@@ -8,6 +8,7 @@ var discordPrefix = ",";
 const embed = new Discord.MessageEmbed();
 const logsChannel = client.channels.get(797977942557851678);
 const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
+var newPrefix = ",";
 const nextEmote = "▶";
 const previousEmote = "◀";
 var reason = "none";
@@ -109,8 +110,52 @@ client.on("message", msg => {
             
         } else {
             
-            console.log("The user <@" +msg.author +"> tried to use the ,help command in the channel " +msg.channel.name +" !");
+            console.log("The user <@" +msg.author +"> tried to use the " +discordPrefix +"help command in the channel " +msg.channel.name +" !");
             msg.channel.send("You can't use the command on this channel !");
+            
+        };
+        
+    };
+    if (msg.content.startsWith === discordPrefix +"dcp") {
+        
+        if (msg.author.bot) {
+            
+            console.log("The bot " +msg.author +" tried to use the " +discordPrefix +"cp command !");
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A bot tried to use the " +discordPrefix +"cp command !**");
+            embed.setDescription("The bot " +msg.author +" tried to use the " +discordPrefix +"dcp command on the channel " +msg.channel.name +" to change the discord bot prefix.");
+            logsChannel.send(embed);
+            
+        } else {
+            
+            if (msg.author.id in staffs) {
+                
+                newPrefix = msg.content.trim(discordPrefix.length +3).trim();
+                console.log("The discord bot prefix has been changed by " +msg.author +" from " +discordPrefix +" to " +newPrefix);
+                embed.setColor("#00FF00");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**Bot prefix has been changed !**");
+                embed.setDescription("The prefix has been changed from " +discordPrefix +" to " +newPrefix);
+                msg.channel.send(embed);
+                discordPrefix = newPrefix;
+                newPrefix = ",";
+                
+            } else {
+                
+                console.log("The user " +msg.author +" used the " +discordPrefix +"dcp command in the channel " +msg.channel.name +" to change the discord prefix but is not a staff member.");
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**Command access denied !**");
+                embed.setDescription("You need to be a staff member to use this command.");
+                msg.channel.send(embed);
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**A user tried to change the prefix !**");
+                embed.setDescription("The user " +msg.author +" tried to change the prefix but is not a member of the staff.");
+                msg.channel.send(embed);
+                
+            };
             
         };
         
