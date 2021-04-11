@@ -96,10 +96,13 @@ client.on("message", msg => {
                 embed.setColor("#1D7EEB");
                 embed.setAuthor(msg.author);
                 embed.setTitle("Marscoin bot help page");
-                embed.setDescription("**Help page :**\n\n**🌐General commands :**");
-                msg.channel.send(embed);
-                msg.react(previousEmote);
-                msg.react(nextEmote);
+                embed.setDescription("**Help page :**\n\n**🌐General commands :**\n\n");
+                msg.channel.send(embed).then(msg => {
+                    
+                    msg.react(previousEmote);
+                    msg.react(nextEmote);
+                    
+                });
                 
             };
             
