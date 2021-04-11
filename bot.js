@@ -2,10 +2,10 @@
 
 const Discord = require("discord.js");
 
-const embed = new Discord.MessageEmbed();
 const client = new Discord.Client();
 const discordBotToken = ""; // paste your bot token between the quotes
 var discordPrefix = ",";
+const embed = new Discord.MessageEmbed();
 const logsChannel = client.channels.get(797977942557851678);
 const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
 const nextEmote = "▶";
