@@ -113,14 +113,60 @@ client.on("message", msg => {
     };
     if (msg.content.startsWith === discordPrefix +"warn") {
         
-        
+        if (msg.author.bot) {
+            
+            console.log("The bot " +msg.author +" tried to use the ,warn command !");
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A bot tried to warn a user !**");
+            embed.setDescription("The bot " +msg.author +" tried to warn the user " +userMentionned +" for " +reason +" .");
+            logsChannel.send(embed);
+            embed.setColor()
+            
+        } else {
+            
+            if (msg.author.id in staffs) {
+                
+                if (userMentionned in staffs) {
+                    
+                    console.log("The staff member " +msg.author +" tried to warn the staff member " +userMentionned.tag);
+                    
+                } else {
+                    
+                    console.log("The user " +userMentionned +" was been warned by " +msg.author +" for " +reason +" !");
+                    embed.setColor("00FF00");
+                    embed.setAuthor(msg.author);
+                    embed.setTitle("**User was been warned !**");
+                    embed.setDescription("The user " +userMentionned +" has been warned by " +msg.author +" for " +reason +" .");
+                    msg.channel.send(embed);
+                    embed.setColor("#00FF00");
+                    embed.setAuthor(msg.author);
+                    embed.setTitle("**User has been warned !**");
+                    embed.setDescription("The user " +userMentionned +" has been warned by " +msg.author +"for " +reason +" .");
+                    logsChannel.send(embed)
+                    
+                };
+                
+            } else {
+                
+                console.log("The user " +msg.author +" tried to warn the user " +userMentioned +" for " +reason +" .");
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**You can't warn the other users !**");
+                embed.setDescription();
+                msg.channel.send(embed);
+                
+                
+            };
+            
+        };
         
     };
     if (msg.content.startsWith === discordPrefix +"kick") {
         
         if (msg.author.bot) {
             
-            console.log("The bot <@" +msg.author +" tried to use the ,kick command !");
+            console.log("The bot " +msg.author +" tried to use the ,kick command !");
             embed.setColor("#1D7EEB");
             embed.setAuthor(msg.author);
             embed.setTitle("**A bot tried to use a command !**");
@@ -130,10 +176,11 @@ client.on("message", msg => {
         } else {
             
             if (msg.author.id in staffs) {
+                
                 userMentionned = msg.mentions.members.first().id;
                 if (userMentionned in staffs) {
                     
-                    console.log("The user " +msg.author +" tried to ban  staff member.");
+                    console.log("The user " +msg.author +" tried to ban a staff member.");
                     
                 } else {
                     
@@ -168,7 +215,7 @@ client.on("message", msg => {
         
         if (msg.author.bot) {
             
-            console.log("The bot <@" +msg.author +" tried to use the ban command !");
+            console.log("The bot " +msg.author +" tried to use the ban command !");
             embed.setColor("#FF0000");
             embed.setAuthor(msg.author);
             embed.setTitle("**A bot tried to use the ,ban command !**");
