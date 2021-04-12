@@ -99,7 +99,7 @@ client.on("message", msg => {
                 embed.setColor("#1D7EEB");
                 embed.setAuthor(msg.author);
                 embed.setTitle("Marscoin bot help page");
-                embed.setDescription(config.commands.helpPage);
+                embed.setDescription(config.commands.help);
                 msg.channel.send(embed).then(msg => {
                     
                     msg.react(previousEmote);
