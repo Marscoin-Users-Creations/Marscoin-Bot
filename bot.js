@@ -198,13 +198,18 @@ client.on("message", msg => {
                 
             } else {
                 
+                userMentionned = msg.mentions.members.first();
+                reason = msg.content.trim(discordPrefix.length +4).slice();
                 console.log("The user " +msg.author +" tried to warn the user " +userMentioned +" for " +reason +" .");
                 embed.setColor("#FF0000");
                 embed.setAuthor(msg.author);
                 embed.setTitle("**You can't warn the other users !**");
                 embed.setDescription();
                 msg.channel.send(embed);
-                
+                embed.setColor("#FF0000");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**A user tried to warn an other user !**");
+                embed.setDescription("The user " +msg.author +" tried to warn the user " +userMentionned +" for " +reason);
                 
             };
             
@@ -227,6 +232,7 @@ client.on("message", msg => {
             if (msg.author.id in staffs) {
                 
                 userMentionned = msg.mentions.members.first().id;
+                reason = msg.content.trim(discordPrefix.length +4).slice();
                 if (userMentionned in staffs) {
                     
                     console.log("The user " +msg.author +" tried to ban a staff member.");
@@ -320,10 +326,10 @@ const twitter = require("twitter");
 
 const client = new twitter({
     
-    consumer_key: "",
-    consumer_secret: "",
-    access_token_key: "",
-    access_token_secret: ""
+    consumer_key: "", // paste your account public key between the quotes
+    consumer_secret: "", // paste your account secret key between the quotes
+    access_token_key: "", // paste your account access public token between the quotes
+    access_token_secret: "" // paste your account access secret token between the quotes
     
 });
 
