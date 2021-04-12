@@ -126,6 +126,40 @@ client.on("message", msg => {
         };
         
     };
+    if (msg.content.startsWith === discordPrefix +"bservers") {
+        
+        if (msg.author.bot) {
+            
+            console.log("The bot " +msg.author +" asked in the channel " +msg.channel.name +" in how many servers i am.");
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A bot tried to use the command " +discordPrefix +"bservers**");
+            embed.setDescription("The bot " +msg.author +" asked in the channel " +msg.channel.name +" in how many servers i am, i didn't asnwered him.");
+            logsChannel.send(embed);
+            
+        } else {
+            
+            if (client.guilds.size > 1) {
+                
+                console.log("The user " +msg.author +" asked in the server " +msg.guild.name +" in how many discord servers i am, i answered him than im on " +client.guilds.size +" servers !");
+                embed.setColor("#00FF00");
+                embed.setAuthor(msg.author);
+                embed.setTitle("**I am in : " +client.guilds.size +" servers.**");
+                msg.channel.send(embed);
+                
+            } else {
+                
+                console.log("The user " +msg.author +" asked in the server " +msg.guild.name +" in how many discord servers i am, i answered him than im one 1 server !");
+                embed.setColor();
+                embed.setAuthor(msg.author);
+                embed.setTitle("**I am in : 1 server.**");
+                msg.channel.send(embed);
+                
+            };
+            
+        };
+        
+    };
     if (msg.content.startsWith === discordPrefix +"dcp") {
         
         if (msg.author.bot) {
