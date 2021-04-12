@@ -3,6 +3,7 @@
 const Discord = require("discord.js");
 
 const client = new Discord.Client();
+const config = require("./config.json");
 const discordBotToken = ""; // paste your bot token between the quotes
 var discordPrefix = ",";
 const embed = new Discord.MessageEmbed();
@@ -98,7 +99,7 @@ client.on("message", msg => {
                 embed.setColor("#1D7EEB");
                 embed.setAuthor(msg.author);
                 embed.setTitle("Marscoin bot help page");
-                embed.setDescription("**Help page :**\n\n**🌐General commands :**\n\n");
+                embed.setDescription(config.commands.helpPage);
                 msg.channel.send(embed).then(msg => {
                     
                     msg.react(previousEmote);
@@ -111,7 +112,16 @@ client.on("message", msg => {
         } else {
             
             console.log("The user <@" +msg.author +"> tried to use the " +discordPrefix +"help command in the channel " +msg.channel.name +" !");
-            msg.channel.send("You can't use the command on this channel !");
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**You can't use the command in this channel !**");
+            embed.setDescription("You can only use this commmand on the chanel <#812346669815037963> .");
+            msg.channel.send(embed);
+            embed.setColor("#FF0000");
+            embed.setAuthor(msg.author);
+            embed.setTitle("**A user tried to use the " +discordPrefix +"help command in a wrong channel !**");
+            embed.setDescription("The user " +msg.author +" tried to use the " +discordPrefix +"help command in the channel " +msg.channel.name +" .");
+            logsChannel.send(embed);
             
         };
         
