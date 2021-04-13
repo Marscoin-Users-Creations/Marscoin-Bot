@@ -220,6 +220,8 @@ client.on("message", msg => {
             
             if (msg.author.id in staffs) {
                 
+                userMentionned = msg.mentions.members.first();
+                reason = msg.content.trim(discordPrefix.length +4 +msg.mentions.members.first().length).slice();
                 if (userMentionned in staffs) {
                     
                     console.log("The staff member " +msg.author +" tried to warn the staff member " +userMentionned.tag);
