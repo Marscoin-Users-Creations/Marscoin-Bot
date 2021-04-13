@@ -394,6 +394,12 @@ const httpServer = http.createServer(function (req, res) {
         res.write("<html>\n    \n    <head>\n        \n        <meta charset='utf-8'>\n        <script>\n            \n            var pageTheme = 0;\n        var configButton = document.getElementById('config');\n        configButton.onclick = function(configButtonClicked) {\n            \n            if (pageTheme = 0) {\n                \n                pageTheme = 1;\n                document.clear();\n                document.write();\n                console.log(`The page is now on the dark theme !`);\n                \n            } else {\n                \n                pageTheme = 0;\n                document.clear();\n                document.write('');\n                console.log(`The page is now on the light theme !`);\n                \n            };\n            \n        };\n        </script>\n        <style>\n            \n            \n            \n        </style>\n        \n</head>\n    <body>\n        \n        <p>version 0 web page, coding it</p>\n        \n    </body>\n    \n</html>");
         
     };
+    if (page == "/discord") {
+        
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write("<html>\n    \n    <head>\n        \n        <meta charset='utf-8'>\n        <script>\n            \n            var pageTheme = 0;\n        var configButton = document.getElementById('config');\n        configButton.onclick = function(configButtonClicked) {\n            \n            if (pageTheme = 0) {\n                \n                pageTheme = 1;\n                document.clear();\n                document.write();\n                console.log(`The page is now on the dark theme !`);\n                \n            } else {\n                \n                pageTheme = 0;\n                document.clear();\n                document.write('');\n                console.log(`The page is now on the light theme !`);\n                \n            };\n            \n        };\n        </script>\n        <style>\n            \n            \n            \n        </style>\n        \n</head>\n    <body>\n        \n        <p>version 0 web page, coding it</p>\n        \n    </body>\n    \n</html>");
+        
+    };
     if (page == "/config") {
         
         res.writeHead(200, {"Content-Type": "text/html"});
