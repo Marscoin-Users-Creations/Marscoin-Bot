@@ -3,13 +3,19 @@
     "bot": {
         
         "name": "",
-        "game": "",
+        "game": {
+            
+            "name": "",
+            "type": ""
+            
+        },
         "token": ""
         
     },
     "channels": {
         
-        "logs": 797977942557851678
+        "logs": 797977942557851678,
+        "welcome": 0
         
     }
     
