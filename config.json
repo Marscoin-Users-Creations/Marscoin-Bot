@@ -5,10 +5,11 @@
         "name": "",
         "game": {
             
-            "name": "",
-            "type": ""
+            "name": "Marscoin Bot **,help**",
+            "type": "PLAYING"
             
         },
+        "status": "idle",
         "token": ""
         
     },
