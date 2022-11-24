@@ -20,7 +20,7 @@ const staffs = [ 598868304769187842, 469576772048912394, 447432117669068800, 271
 const logsChannel = client.channels.get(config["channels"["logs"]]),
       welcomeChannel = client.channels.get(config["channels"["welcome"]]);
 
-const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
+const marscoinEmote = client.emojis.find(emoji => emoji.id(812093126717210635));
 
 client.on("ready", () => {
     
@@ -30,8 +30,8 @@ client.on("ready", () => {
         
         game: {
             
-            name: "Marscoin Bot **,help**",
-            type: "PLAYING"
+            name: config["bot"["game"["name"]]],
+            type: config["bot"["game"["type"]]]
             
         },
         status: "idle"
