@@ -12,12 +12,13 @@ var discordPrefix = ",",
     newPrefix = ",";
 
 const nextEmote = "▶",
-      previousEmote = "◀";
+      previousEmote = "◀",
+      leaveEmote = "";
 
 const staffs = [ 598868304769187842, 469576772048912394, 447432117669068800, 271008178169315338, 125952165616418816, 533016846031650826 ];
 
 const logsChannel = client.channels.get(config["channels"["logs"]]),
-      welcomeChannel = client.channels.get(797965608721448980);
+      welcomeChannel = client.channels.get(config["channels"["welcome"]]);
 
 const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
 
