@@ -1,8 +1,15 @@
 {
     
-    "commands": {
+    "bot": {
         
-        "help": "**Bot commands :**\n\n**1 - 🌐General commands :**\n\n1.1 - help : If you send this command in the channel <#812346669815037963> i will send the help page with all commands.\n**1.2 - report :**If you send this command in a channel with some arguments ( a little sentence ) i will send to the staff members chat your report with the reason of the report.",
+        "name": "",
+        "game": "",
+        "token": ""
+        
+    },
+    "channels": {
+        
+        "logs": 797977942557851678
         
     }
     
