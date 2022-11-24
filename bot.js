@@ -1,21 +1,25 @@
 // discord bot
 
 const Discord = require("discord.js");
-
 const client = new Discord.Client();
+
+
 const config = require("./config.json");
-const discordBotToken = ""; // paste your bot token between the quotes
-var discordPrefix = ",";
-const embed = new Discord.MessageEmbed();
-const logsChannel = client.channels.get(797977942557851678);
-const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
-var newPrefix = ",";
-const nextEmote = "▶";
-const previousEmote = "◀";
-var reason = "none";
+
+const botToken = config["bot"["token"]]; // paste your bot token between the quotes
+
+var discordPrefix = ",",
+    newPrefix = ",";
+
+const nextEmote = "▶",
+      previousEmote = "◀";
+
 const staffs = [ 598868304769187842, 469576772048912394, 447432117669068800, 271008178169315338, 125952165616418816, 533016846031650826 ];
-var userMentionned =  0;
-const welcomeChannel = client.channels.get(797965608721448980);
+
+const logsChannel = client.channels.get(config["channels"["logs"]]),
+      welcomeChannel = client.channels.get(797965608721448980);
+
+const marscoinEmoteId = client.emojis.find(emoji => emoji.id(812093126717210635));
 
 client.on("ready", () => {
     
